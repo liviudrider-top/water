@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be Water My Friend - Japanese Water Animation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #001a33 0%, #003366 50%, #004080 100%);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Water waves container */
+        .water-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60%;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(0, 119, 190, 0.8) 0%, 
+                rgba(0, 180, 216, 0.9) 50%, 
+                rgba(144, 224, 239, 1) 100%);
+            border-radius: 45% 55% 0 0;
+            animation: wave 8s ease-in-out infinite;
+        }
+
+        .wave:nth-child(2) {
+            background: linear-gradient(180deg, 
+                rgba(0, 150, 199, 0.6) 0%, 
+                rgba(72, 202, 228, 0.7) 50%, 
+                rgba(173, 232, 244, 0.8) 100%);
+            animation: wave 6s ease-in-out infinite;
+            animation-delay: -2s;
+            bottom: 10px;
+        }
+
+        .wave:nth-child(3) {
+            background: linear-gradient(180deg, 
+                rgba(0, 180, 216, 0.4) 0%, 
+                rgba(144, 224, 239, 0.5) 50%, 
+                rgba(202, 240, 248, 0.6) 100%);
+            animation: wave 10s ease-in-out infinite;
+            animation-delay: -4s;
+            bottom: 20px;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
+            }
+            25% {
+                transform: translateX(-25%) translateY(-20px);
+            }
+            50% {
+                transform: translateX(-50%) translateY(0);
+            }
+            75% {
+                transform: translateX(-25%) translateY(20px);
+            }
+        }
+
+        /* Japanese style elements */
+        .japanese-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(255, 255, 255, 0.03) 20px,
+                    rgba(255, 255, 255, 0.03) 40px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(255, 255, 255, 0.03) 20px,
+                    rgba(255, 255, 255, 0.03) 40px
+                );
+            pointer-events: none;
+        }
+
+        /* Slogan container */
+        .slogan-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            color: white;
+        }
+
+        .slogan {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.5),
+                0 0 40px rgba(0, 180, 216, 0.8),
+                0 0 60px rgba(0, 180, 216, 0.6);
+            animation: fadeInUp 2s ease-out, glow 3s ease-in-out infinite alternate;
+            margin-bottom: 2rem;
+        }
+
+        .japanese-text {
+            font-size: 2rem;
+            opacity: 0.8;
+            letter-spacing: 0.3em;
+            animation: fadeInUp 2s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.5),
+                    0 0 40px rgba(0, 180, 216, 0.8),
+                    0 0 60px rgba(0, 180, 216, 0.6);
+            }
+            to {
+                text-shadow: 
+                    0 0 30px rgba(255, 255, 255, 0.8),
+                    0 0 50px rgba(0, 180, 216, 1),
+                    0 0 70px rgba(0, 180, 216, 0.8);
+            }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* Koi fish silhouette */
+        .koi-fish {
+            position: absolute;
+            width: 120px;
+            height: 60px;
+            background: linear-gradient(90deg, #ff6b6b, #ffa500, #ff6b6b);
+            border-radius: 50% 10% 50% 10%;
+            opacity: 0.7;
+            animation: swim 15s ease-in-out infinite;
+        }
+
+        .koi-fish::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 15px;
+            left: 20px;
+            box-shadow: inset 0 0 0 8px #333;
+        }
+
+        .koi-fish::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 15px;
+            background: inherit;
+            right: -15px;
+            top: 22px;
+            transform: rotate(-20deg);
+            border-radius: 0 50% 50% 0;
+        }
+
+        @keyframes swim {
+            0%, 100% {
+                left: -150px;
+                top: 60%;
+            }
+            25% {
+                left: 30%;
+                top: 55%;
+            }
+            50% {
+                left: 60%;
+                top: 65%;
+            }
+            75% {
+                left: 90%;
+                top: 58%;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .slogan {
+                font-size: 2.5rem;
+            }
+            .japanese-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Japanese pattern overlay -->
+    <div class="japanese-pattern"></div>
+
+    <!-- Water waves -->
+    <div class="water-container">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <!-- Koi fish -->
+    <div class="koi-fish"></div>
+
+    <!-- Slogan -->
+    <div class="slogan-container">
+        <h1 class="slogan">Be Water My Friend</h1>
+        <p class="japanese-text">水のように流れよ</p>
+    </div>
+
+    <!-- Floating particles -->
+    <div id="particles"></div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size
+                const size = Math.random() * 6 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.bottom = '0';
+                
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Mouse interaction with water
+        function addMouseInteraction() {
+            const waterContainer = document.querySelector('.water-container');
+            
+            document.addEventListener('mousemove', (e) => {
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.borderRadius = '50%';
+                ripple.style.border = '2px solid rgba(255, 255, 255, 0.5)';
+                ripple.style.left = e.clientX + 'px';
+                ripple.style.top = e.clientY + 'px';
+                ripple.style.transform = 'translate(-50%, -50%)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 1s ease-out forwards';
+                
+                document.body.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        }
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                0% {
+                    width: 20px;
+                    height: 20px;
+                    opacity: 1;
+                }
+                100% {
+                    width: 100px;
+                    height: 100px;
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        createParticles();
+        addMouseInteraction();
+
+        // Add multiple koi fish
+        setTimeout(() => {
+            const koi2 = document.createElement('div');
+            koi2.className = 'koi-fish';
+            koi2.style.animationDelay = '5s';
+            koi2.style.top = '70%';
+            document.body.appendChild(koi2);
+        }, 2000);
+
+        setTimeout(() => {
+            const koi3 = document.createElement('div');
+            koi3.className = 'koi-fish';
+            koi3.style.animationDelay = '10s';
+            koi3.style.top = '50%';
+            koi3.style.background = 'linear-gradient(90deg, #ffffff, #e0e0e0, #ffffff)';
+            document.body.appendChild(koi3);
+        }, 4000);
+    </script>
+</body>
+</html>
